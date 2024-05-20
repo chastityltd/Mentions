@@ -256,5 +256,10 @@ async def on_message(message: disnake.Message):
     await client.process_commands(message)
 
 
+db_connection = sqlite3.connect("config.sqlite3")
+db_cursor = db_connection.cursor()
+token= db_cursor.execute("SELECT Token FROM configData").fetchone
+db_cursor.close()
+client.run(token)
 
-client.run(db_cursor.execute("SELECT Token FROM configData").fetchone)
+
